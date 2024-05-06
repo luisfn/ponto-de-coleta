@@ -1,0 +1,51 @@
+services:
+
+  php:
+    build:
+      context: ./infra/php
+      dockerfile: Dockerfile
+    container_name: php
+    volumes:
+      - ./:/var/www/html
+    networks:
+      - backend
+
+  mysql:
+    container_name: mysql
+    image: mysql:8
+    restart: always
+    environment:
+      MYSQL_DATABASE: pontodecoleta
+      MYSQL_USER: pontodecoleta
+      MYSQL_PASSWORD: pontodecoleta
+      MYSQL_ROOT_PASSWORD: pontodecoleta
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - backend
+
+  nginx:
+    container_name: nginx
+    image: nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./infra/nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - php
+    networks:
+      - backend
+
+  adminer:
+    container_name: adminer
+    image: adminer
+    ports:
+      - "8081:8080"
+    networks:
+      - backend
+
+networks:
+  backend:
+
+volumes:
+  db_data:
