@@ -59,7 +59,10 @@ test:
 
 # Open a shell in the PHP service container
 shell:
-	docker-compose exec php sh
+	docker-compose exec php bash
+
+autoload:
+	$(EXEC) php $(COMPOSER) dump-autoload
 
 # Create database schema
 create-db:
