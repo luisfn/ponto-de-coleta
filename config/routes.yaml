@@ -3,7 +3,17 @@ ponto-de-coleta:
   controller: Coleta\Controller\ColetaController::index
   methods: [GET, OPTIONS]
 
-admin_dashboard:
+dashboard:
   path: /admin
   controller: Admin\Controller\DashboardController::index
   methods: [GET, OPTIONS]
+
+registration:
+  path: /registration
+  controller: Admin\Controller\RegistrationController::register
+  methods: [GET, POST, OPTIONS]
+
+verify-email:
+  path: /verify-email
+  controller: Admin\Controller\RegistrationController::verifyUserEmail
+  methods: [GET, POST, OPTIONS]
