@@ -1,4 +1,9 @@
 ponto-de-coleta:
   path: /pontos-de-coleta
   controller: Coleta\Controller\ColetaController::index
-  methods: [GET]
+  methods: [GET, OPTIONS]
+
+admin_dashboard:
+  path: /admin
+  controller: Admin\Controller\DashboardController::index
+  methods: [GET, OPTIONS]

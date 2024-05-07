@@ -17,3 +17,8 @@ services:
         resource: '../src/Coleta/'
         exclude:
             - '../src/Coleta/Entity/'
+
+    Admin\:
+        resource: '../src/Admin/'
+        exclude:
+            - '../src/Admin/Entity/'
