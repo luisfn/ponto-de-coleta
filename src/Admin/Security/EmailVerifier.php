@@ -2,6 +2,7 @@
 
 namespace Admin\Security;
 
+use Admin\Enum\UserState;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -46,6 +47,8 @@ class EmailVerifier
         $this->verifyEmailHelper->validateEmailConfirmationFromRequest($request, (string) $user->getId(), $user->getEmail());
 
         $user->setIsVerified(true);
+        $user->setState(UserState::VERIFIED);
+        $user->setUpdatedAt(new \DateTimeImmutable());
 
         $this->entityManager->persist($user);
         $this->entityManager->flush();
