@@ -34,7 +34,10 @@ make restart:
 
 # Show Symfony development server logs
 logs:
-	$(DOCKER_COMPOSE) logs -f nginx
+	$(DOCKER_COMPOSE) logs -f $(container)
+
+dev-logs:
+	$(EXEC) php tail -f var/log/dev.log
 
 # Install PHP dependencies using Composer
 install:
@@ -95,19 +98,24 @@ help:
 	@echo "Usage: make [target]"
 	@echo ""
 	@echo "Available targets:"
-	@echo "  start          Start Symfony development server"
+	@echo "  start          Start Symfony development server using Docker Compose"
 	@echo "  stop           Stop Symfony development server"
-	@echo "  install        Install PHP dependencies using Composer"
+	@echo "  restart        Restart Symfony development server"
+	@echo "  logs           Show Docker Compose logs"
+	@echo "  dev-logs       Tail development logs"
+	@echo "  install        Install PHP dependencies using Composer in the Docker environment"
 	@echo "  update         Update PHP dependencies using Composer"
 	@echo "  clear-cache    Clear Symfony cache"
-	@echo "  cmd            Run Symfony console commands (usage: make cmd cmd=\"your:symfony:command\")"
+	@echo "  warm-cache     Warm up Symfony cache"
 	@echo "  test           Run PHPunit tests"
-	@echo "  create-db      Create database schema"
-	@echo "  drop-db        Drop database schema"
-	@echo "  update-db      Update database schema"
-	@echo "  load-fixtures  Load fixtures (if using DoctrineFixturesBundle)"
-	@echo "  migrate        Run migrations (if using DoctrineMigrationsBundle)"
-	@echo "  deploy         Run all necessary steps to prepare the application for production"
+	@echo "  shell          Open a bash shell in the PHP service container"
+	@echo "  autoload       Dump Composer autoload"
+	@echo "  create-db      Create database schema if it does not exist"
+	@echo "  drop-db        Forcefully drop database schema if it exists"
+	@echo "  update-db      Forcefully update database schema"
+	@echo "  load-fixtures  Load Doctrine fixtures without interaction"
+	@echo "  migrate        Run Doctrine migrations without interaction"
+	@echo "  deploy         Prepare application for production by running necessary steps"
 	@echo "  help           Show this help message"
 
-.PHONY: start stop install update clear-cache cmd test create-db drop-db update-db load-fixtures migrate deploy help
+.PHONY: start stop install update clear-cache warm-cache test shell autoload create-db drop-db update-db load-fixtures migrate deploy help

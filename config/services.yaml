@@ -32,3 +32,8 @@ services:
         resource: '../src/Admin/'
         exclude:
             - '../src/Admin/Entity/'
+
+    Admin\Provider\UserProvider:
+        arguments:
+            $classOrAlias: 'App\Entity\User'
+            $property: 'email'

@@ -2,6 +2,7 @@
 
 namespace Admin\Controller;
 
+use Admin\Enum\UserState;
 use Admin\Form\RegistrationFormType;
 use Admin\Security\EmailVerifier;
 use App\Entity\User;
@@ -39,7 +40,7 @@ class RegistrationController extends AbstractController
             );
             $user->setFirstName('Alan');
             $user->setLastName('Wake');
-            $user->setState('registered');
+            $user->setState(UserState::REGISTERED);
             $user->setCreatedAt(new \DateTimeImmutable());
             $user->setUpdatedAt(new \DateTimeImmutable());
 
