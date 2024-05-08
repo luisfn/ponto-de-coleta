@@ -13,8 +13,12 @@ services:
 
 
     App\:
-        resource: '../src'
-
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+            
     App\Repository\:
         resource: '../src/Repository'
         tags: [ 'doctrine.repository_service' ]
