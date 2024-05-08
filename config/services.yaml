@@ -12,6 +12,9 @@ services:
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
 
+    App\:
+        resource: '../src'
+
     App\Repository\:
         resource: '../src/Repository'
         tags: [ 'doctrine.repository_service' ]
