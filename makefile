@@ -22,7 +22,6 @@ EXEC = $(DOCKER_COMPOSE) exec -T
 # Start Symfony development server
 start:
 	$(DOCKER_COMPOSE) up -d
-	#$(DOCKER_COMPOSE) logs -f
 
 # Stop Symfony development server
 stop:
@@ -32,6 +31,10 @@ stop:
 make restart:
 	$(DOCKER_COMPOSE) down
 	$(DOCKER_COMPOSE) up -d
+
+# Show Symfony development server logs
+logs:
+	$(DOCKER_COMPOSE) logs -f nginx
 
 # Install PHP dependencies using Composer
 install:
