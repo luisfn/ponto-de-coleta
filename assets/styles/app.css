@@ -1,3 +1,4 @@
+/* Login page styles */
 .login-container {
     max-width: 360px;
     margin: 50px auto;
@@ -45,4 +46,69 @@
         margin: 20px auto;
         padding: 20px;
     }
+}
+
+/* Register page styles */
+body {
+    font-family: 'Arial', sans-serif; /* Ensures a clean, readable font is used */
+    background: #f4f4f9; /* Light grey background for slight contrast */
+    color: #333; /* Dark grey text for readability */
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #0056b3; /* A shade of blue for a professional feel */
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+    width: calc(100% - 20px); /* Full width with padding consideration */
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Includes padding and border in element's total width and height */
+}
+
+input[type="checkbox"] {
+    margin-top: 3px;
+}
+
+button.btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff; /* Bootstrap primary blue */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px; /* Larger font size for better visibility */
+}
+
+button.btn:hover {
+    background-color: #0056b3; /* Darker shade of blue on hover for button */
+}
+
+/* Ensuring the form is centered on the page */
+.registration-container {
+    max-width: 400px;
+    margin: 30px auto;
+    padding: 20px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
