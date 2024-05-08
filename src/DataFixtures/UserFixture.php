@@ -2,15 +2,18 @@
 
 namespace App\DataFixtures;
 
+use Admin\Enum\UserRole;
+use Admin\Enum\UserState;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\PasswordHasher\PasswordHasherInterface;
 
 class UserFixture extends Fixture
 {
+    public const REGULAR_USER_REFERENCE = 'regular-user';
     public const ADMIN_USER_REFERENCE = 'admin-user';
+    public const SUPER_ADMIN_USER_REFERENCE = 'super-admin-user';
 
     private UserPasswordHasherInterface $passwordHasher;
 
@@ -20,21 +23,77 @@ class UserFixture extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        $admin = new User();
-        $admin->setEmail('admin@test.com');
-        $admin->setFirstName('Admin');
-        $admin->setLastName('Test');
-        $admin->setRoles(['ROLE_ADMIN']);
-        $admin->setState('verified');
-        $admin->setCreatedAt(new \DateTimeImmutable());
-        $admin->setUpdatedAt(new \DateTimeImmutable());
+        $users = [
+            $this->getAdminUser(),
+            $this->getRegularUser(),
+            $this->getSuperAdminUser(),
+        ];
 
-        $password = $this->passwordHasher->hashPassword($admin, 'a1s2d3f4');
-        $admin->setPassword($password);
+        foreach ($users as $user) {
+            $password = $this->passwordHasher->hashPassword($user, 'a1s2d3f4');
+            $user->setPassword($password);
 
-        $manager->persist($admin);
+            $manager->persist($user);
+        }
+
         $manager->flush();
+    }
 
-        $this->addReference(self::ADMIN_USER_REFERENCE, $admin);
+    private function getSuperAdminUser(): User
+    {
+        $user = new User();
+        $user->setEmail('superadmin@test.com');
+        $user->setFirstName('Super');
+        $user->setLastName('Admin');
+        $user->addRoles(
+            UserRole::ROLE_USER,
+            UserRole::ROLE_ADMIN,
+            UserRole::ROLE_SUPER_ADMIN,
+        );
+        $user->setState(UserState::VERIFIED);
+        $user->setIsVerified(true);
+        $user->setCreatedAt(new \DateTimeImmutable());
+        $user->setUpdatedAt(new \DateTimeImmutable());
+
+        $this->addReference(self::SUPER_ADMIN_USER_REFERENCE, $user);
+
+        return $user;
+    }
+
+    private function getAdminUser(): User
+    {
+        $user = new User();
+        $user->setEmail('admin@test.com');
+        $user->setFirstName('Admin');
+        $user->setLastName('User');
+        $user->addRoles(
+            UserRole::ROLE_USER,
+            UserRole::ROLE_ADMIN,
+        );
+        $user->setState(UserState::VERIFIED);
+        $user->setIsVerified(true);
+        $user->setCreatedAt(new \DateTimeImmutable());
+        $user->setUpdatedAt(new \DateTimeImmutable());
+
+        $this->addReference(self::ADMIN_USER_REFERENCE, $user);
+
+        return $user;
+    }
+
+    private function getRegularUser(): User
+    {
+        $user = new User();
+        $user->setEmail('user@test.com');
+        $user->setFirstName('Regular');
+        $user->setLastName('User');
+        $user->addRoles(UserRole::ROLE_USER);
+        $user->setState(UserState::VERIFIED);
+        $user->setIsVerified(true);
+        $user->setCreatedAt(new \DateTimeImmutable());
+        $user->setUpdatedAt(new \DateTimeImmutable());
+
+        $this->addReference(self::REGULAR_USER_REFERENCE, $user);
+
+        return $user;
     }
 }

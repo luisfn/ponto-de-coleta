@@ -52,9 +52,9 @@ clear-cache:
 warm-cache:
 	$(EXEC) php $(SYMFONY_CMD) cache:warmup
 
-# Run Symfony console commands (usage: make cmd cmd="your:symfony:command")
-cmd:
-	$(EXEC) php $(SYMFONY_CMD) $(cmd)
+# Load fixtures
+fixtures:
+	$(EXEC) php $(SYMFONY_CMD) doctrine:fixtures:load
 
 # Run PHPunit tests
 test:

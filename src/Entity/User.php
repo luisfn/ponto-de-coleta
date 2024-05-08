@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Admin\Enum\UserRole;
+use Admin\Enum\UserState;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -37,7 +39,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private bool $isVerified = false;
 
     #[ORM\Column(length: 30)]
-    private ?string $state = null;
+    private ?UserState $state = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
@@ -94,14 +96,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
     }
 
-    public function setRoles(array $roles): self
+    public function addRoles(UserRole ...$roles): self
     {
-        $this->roles = $roles;
+        $this->roles = array_merge($this->roles, $roles);
 
         return $this;
     }
@@ -139,12 +140,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getState(): ?string
+    public function getState(): ?UserState
     {
         return $this->state;
     }
 
-    public function setState(string $state): self
+    public function setState(UserState $state): self
     {
         $this->state = $state;
 
