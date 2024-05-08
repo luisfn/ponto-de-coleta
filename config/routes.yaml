@@ -8,12 +8,22 @@ dashboard:
   controller: Admin\Controller\DashboardController::index
   methods: [GET, OPTIONS]
 
-registration:
-  path: /registration
+register:
+  path: /register
   controller: Admin\Controller\RegistrationController::register
   methods: [GET, POST, OPTIONS]
 
 verify-email:
   path: /verify-email
   controller: Admin\Controller\RegistrationController::verifyUserEmail
+  methods: [GET, POST, OPTIONS]
+
+login:
+    path: /login
+    controller: Admin\Controller\SecurityController::login
+    methods: [GET, POST, OPTIONS]
+
+logout:
+  path: /logout
+  controller: Admin\Controller\SecurityController::logout
   methods: [GET, POST, OPTIONS]
