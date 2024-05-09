@@ -11,18 +11,23 @@ class DashboardController extends AbstractDashboardController
 {
     public function index(): Response
     {
-        return parent::index();
+        return $this->render('admin/dashboard.html.twig');
     }
 
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Ponto De Coleta');
+            ->setTitle('Pontos de Coleta')
+            ->setFaviconPath('favicon.svg')
+            //->renderContentMaximized()
+            //->renderSidebarMinimized()
+            //->disableDarkMode()
+            ->generateRelativeUrls()
+        ;
     }
 
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 }

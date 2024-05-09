@@ -4,7 +4,7 @@ ponto-de-coleta:
   methods: [GET, OPTIONS]
 
 dashboard:
-  path: /admin
+  path: /dashboard
   controller: Admin\Controller\DashboardController::index
   methods: [GET, OPTIONS]
 
