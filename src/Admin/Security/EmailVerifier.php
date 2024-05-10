@@ -3,7 +3,7 @@
 namespace Admin\Security;
 
 use Admin\Enum\UserState;
-use App\Entity\User;
+use Common\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;

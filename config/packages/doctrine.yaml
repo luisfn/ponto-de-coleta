@@ -16,12 +16,12 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         auto_mapping: true
         mappings:
-            App:
+            Common:
                 is_bundle: false
                 type: attribute
-                dir: '%kernel.project_dir%/src/Entity'
-                prefix: 'App\Entity'
-                alias: App
+                dir: '%kernel.project_dir%/src/Common/Entity'
+                prefix: 'Common\Entity'
+                alias: Common
         controller_resolver:
             auto_mapping: true
 

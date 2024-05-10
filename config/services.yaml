@@ -11,27 +11,36 @@ services:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
+#    Admin\:
+#        resource: '../src/Admin/'
+#
+#    Common\:
+#        resource: '../src/'
+#        exclude:
+#            - '../src/DependencyInjection/'
+#            - '../src/Entity/'
+#            - '../src/Kernel.php'
+#
+#    Common\Repository\:
+#        resource: '../src/Repository'
+#        tags: [ 'doctrine.repository_service' ]
+#
+#    Coleta\:
+#        resource: '../src/Coleta/'
+#        exclude:
+#            - '../src/Coleta/Entity/'
 
-    App\:
-        resource: '../src/'
-        exclude:
-            - '../src/DependencyInjection/'
-            - '../src/Entity/'
-            - '../src/Kernel.php'
-
-    App\Repository\:
-        resource: '../src/Repository'
-        tags: [ 'doctrine.repository_service' ]
-
-    Coleta\:
-        resource: '../src/Coleta/'
-        exclude:
-            - '../src/Coleta/Entity/'
+    Common\:
+        resource: '../src/Common/*'
+        exclude: '../src/Common/{DependencyInjection,Entity,Migrations,Tests}'
 
     Admin\:
-        resource: '../src/Admin/'
-        exclude:
-            - '../src/Admin/Entity/'
+        resource: '../src/Admin/*'
+        exclude: '../src/Admin/{DependencyInjection,Entity,Migrations,Tests}'
+
+    Coleta\:
+        resource: '../src/Coleta/*'
+        exclude: '../src/Admin/{DependencyInjection,Entity,Migrations,Tests}'
 
     Admin\Provider\UserProvider:
         arguments:

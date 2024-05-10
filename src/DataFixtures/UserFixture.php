@@ -4,7 +4,7 @@ namespace App\DataFixtures;
 
 use Admin\Enum\UserRole;
 use Admin\Enum\UserState;
-use App\Entity\User;
+use Common\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;

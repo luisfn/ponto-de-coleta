@@ -57,9 +57,9 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/",
             "Admin\\": "src/Admin/",
-            "Coleta\\": "src/Coleta/"
+            "Coleta\\": "src/Coleta/",
+            "Common\\": "src/Common/"
         }
     },
     "autoload-dev": {
