@@ -2,6 +2,7 @@
 
 namespace Admin\Controller;
 
+use Admin\Enum\UserRole;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -11,6 +12,8 @@ class DashboardController extends AbstractDashboardController
 {
     public function index(): Response
     {
+        $this->denyAccessUnlessGranted(UserRole::ROLE_ADMIN->value);
+
         return $this->render('admin/dashboard.html.twig');
     }
 

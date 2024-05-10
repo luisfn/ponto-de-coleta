@@ -1,0 +1,14 @@
+services:
+  _defaults:
+    public: false
+    autowire: true
+    autoconfigure: true
+
+  Admin\:
+    resource: '../../../src/Admin/*'
+    exclude: '../../../src/Admin/{DependencyInjection,Entity,Migrations,Tests}'
+
+  Admin\Provider\UserProvider:
+    arguments:
+      $classOrAlias: 'Common\Entity\User'
+      $property: 'email'

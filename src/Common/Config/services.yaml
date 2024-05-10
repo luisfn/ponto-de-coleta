@@ -1,0 +1,13 @@
+services:
+  _defaults:
+    public: false
+    autowire: true
+    autoconfigure: true
+
+  Common\:
+    resource: '../../../src/Common/*'
+    exclude: '../../../src/Common/{DependencyInjection,Entity,Migrations,Tests}'
+
+  Common\Repository\:
+    resource: '../../../src/Common/Repository'
+    tags: [ 'doctrine.repository_service' ]
